@@ -1,0 +1,23 @@
+
+//ORM = Object Relational Mapping, ORM is technique to map java object to database tables
+//It allows developers to with database using OOP concepts making it easier to interact with relational database
+
+//JPA == Java Persistence API, it is way to achieve ORM, includes interfaces and annotations that you use in your java classes.
+//requires a persistence provider(ORM tools) to implement.
+
+//Spring data JPS is build on top of JPA to simplifying JPA
+
+// We need to use JPA-compliant provider like hibernate, eclipseLink to handle the database interactions
+
+// But JPA is for only relational databases.
+
+// For mongoDB we use spring data mongoDB
+
+//Query Method DSL and Criteria API are two different ways to interact with database when using Spring data JPA for
+// relational database and Spring data mongoDB for mongoDB
+
+//Spring data JPA is a part of Spring framework that simplifies data access in java applications and Spring data mongoDB does the same for mongodb
+
+//Query Method DSL is a simple and convenient way to create queries based on method naming conventions, while the Criteria API offers a more dynamic
+// and programmatic approach for building complex and custom queries
+

@@ -1,0 +1,10 @@
+
+//When do any operation through an API, the server provides a 3 digit response code that indicates what has happened after we called the API.
+//Digit starting with 1 means something with information, we barely use them
+//Response starting with 2 means success
+//3 means the user needs to do some more steps to complete the process.
+//4 means there was error in clients part
+//5 means there was error in server part
+
+//We can use Response Entity to customize HTTP response
+

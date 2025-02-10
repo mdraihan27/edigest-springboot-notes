@@ -1,0 +1,13 @@
+
+
+//In regular java we create objects of classes ourselves. But in Spring Boot there is IOC (Inversion of Control) container using which we will create objects.
+
+//Application context is a way to implement IOC container, so we can use these two words interchangeably
+
+//If any class has @Component annotation over it, the IOC will container that class's object in it. With this annotation, class is automatically registered as a spring bean ( bean is equivalent of object)
+
+// We put @SpringBootApplication annotation over out main class of project, This annotation does tasks of three other annotations, @Configuration, @EnableAutoConfiguration and @ComponentScan
+
+//@SpringBootApplication annotation scans the package it is places for components and puts then in IOC
+
+

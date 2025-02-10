@@ -1,0 +1,4 @@
+
+//Maven is a build automation tool that makes the build process of  java program easier and helps to manage dependencies
+//POM = Project Object Model
+

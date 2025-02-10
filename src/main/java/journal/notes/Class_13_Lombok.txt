@@ -1,0 +1,8 @@
+
+//Project Lombok is a java library that automatically plugs into your editor and build tools.
+//So that we have to never write another getter or equals method again, with one annotation our class has a fully featured builder,
+// Automate our logging variables, and much more.
+
+//Lombok basically makes methods like getter , setter, constructor with or without argument etc. in compile time so that we don't have to hard code them.
+//There are multiple other features of lombok too than be explored in project lombok website.
+
