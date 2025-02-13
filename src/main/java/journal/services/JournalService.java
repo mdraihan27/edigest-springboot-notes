@@ -7,6 +7,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +27,7 @@ public class JournalService {
 
     }
 
+    @Transactional
     public ResponseEntity postJournalByUsername(JournalTemplate journalTemplate, String username){
 
         UserTemplate user = userService.getUserByUsername(username);
@@ -57,6 +59,7 @@ public class JournalService {
 
     }
 
+    @Transactional
     public void deleteJournalByUsernameAndId(String username, ObjectId id){
 
         UserTemplate user = userService.getUserByUsername(username);
@@ -66,6 +69,7 @@ public class JournalService {
 
     }
 
+    @Transactional
     public void deleteAllByUser(String username){
         UserTemplate user = userService.getUserByUsername(username);
         for(JournalTemplate journal : user.getJournalEntries()){
@@ -74,6 +78,7 @@ public class JournalService {
         user.getJournalEntries().removeIf(x -> x!=null);
     }
 
+    @Transactional
     public ResponseEntity putByUsernameAndId(String username, JournalTemplate newJournal, ObjectId id){
 
         JournalTemplate old = getJournalByUsernameAndId(username,id).orElse(null);

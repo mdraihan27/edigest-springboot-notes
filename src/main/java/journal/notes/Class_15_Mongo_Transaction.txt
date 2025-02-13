@@ -1,0 +1,13 @@
+//When we need to treat codes of a method as a single process we use Transactional annotation over the method.
+//What it does is if any of the lines of code throws any error it rollbacks previously executed lines of code.
+//So that the operation cannot to executed partially, it needs to be executed completely or not execute at all.
+
+// We need to @EnableTransactionManagement annotation over application class, and make instances of PlatformTransactionManager
+//in the following way
+
+@Bean
+public PlatformTransactionManager something(MongoDatabaseFactory dbFactory){
+    return new MongoTransactionManager(dbFactory);
+}
+
+//this will search our project for transactional elements.
