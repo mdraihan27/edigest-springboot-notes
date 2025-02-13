@@ -1,10 +1,11 @@
 package journal.controller;
 
-import journal.JournalTemplate;
+import journal.entity.JournalTemplate;
+import journal.entity.UserTemplate;
 import journal.services.JournalService;
+import journal.services.UserService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,10 +18,13 @@ public class JournalController {
 
     @Autowired
     private JournalService journalService;
+    @Autowired
+    private UserService userService;
 
-    @GetMapping
-    public ResponseEntity<List<JournalTemplate>> getAll() {
-        List<JournalTemplate> allList = journalService.getAllJournal();
+    @GetMapping("view/{username}")
+    public ResponseEntity<List<JournalTemplate>> getAllByUser(@PathVariable String username) {
+        UserTemplate userTemplate = userService.getUserByUsername(username);
+        List<JournalTemplate> allList = userTemplate.getJournalEntries();
 
         if (allList.isEmpty()) {
             return ResponseEntity.noContent().build();  // Returns HTTP 204 No Content
@@ -29,35 +33,40 @@ public class JournalController {
         return ResponseEntity.ok(allList);  // Returns HTTP 200 with the list
     }
 
-    @GetMapping("view/{id}/")
-    public ResponseEntity<Optional<JournalTemplate>> getEntry(@PathVariable ObjectId id) {
-        Optional<JournalTemplate> jt = journalService.getJournalById(id);
+    @GetMapping("view/{username}/{id}")
+    public ResponseEntity<Optional<JournalTemplate>> getEntry(@PathVariable ObjectId id, @PathVariable String username) {
 
-        if(jt.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        Optional<JournalTemplate> journal =  journalService.getJournalByUsernameAndId(username, id);
+
+        if(journal != null){
+            return ResponseEntity.ok(journal);
+        }else{
+            return ResponseEntity.noContent().build();
         }
-        return new ResponseEntity<>(jt, HttpStatus.OK);
+
     }
 
-    @PostMapping
-    public void postJournal(@RequestBody JournalTemplate journalTemplate) {
-        journalService.postJournal(journalTemplate);
+    @PostMapping("create/{username}")
+    public ResponseEntity postJournal(@RequestBody JournalTemplate journalTemplate, @PathVariable String username) {
+
+        return journalService.postJournalByUsername(journalTemplate, username);
     }
 
-    @DeleteMapping("delete/{id}/")
-    public void deleteJournal(@PathVariable ObjectId id) {
-       journalService.deleteJournalById(id);
+    @DeleteMapping("delete/{username}/{id}")
+    public void deleteJournal(@PathVariable String username, @PathVariable ObjectId id) {
+
+        journalService.deleteJournalByUsernameAndId(username, id);
     }
 
-    @DeleteMapping
-    public void deleteAll(){
-        journalService.deleteAll();
+    @DeleteMapping("delete/{username}")
+    public void deleteAll(@PathVariable String username){
+        journalService.deleteAllByUser(username);
     }
 
-    @PutMapping("put/{id}/")
-    public void putJournal(@PathVariable ObjectId id, @RequestBody JournalTemplate journalTemplate) {
+    @PutMapping("put/{username}/{id}")
+    public void putJournal(@PathVariable String username, @PathVariable ObjectId id, @RequestBody JournalTemplate journalTemplate) {
 
-        journalService.putById(journalTemplate, id);
+        journalService.putByUsernameAndId(username, journalTemplate, id);
     }
 
 

@@ -1,4 +1,4 @@
-package journal;
+package journal.entity;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,0 +1,10 @@
+//If we use @DbRef annotation over any container of objects in a POJO, after using the POJO as a template in mongoDB,
+//it makes the container contain reference of that kind of object rather than actual objects in mongoDB database.
+
+
+//In Spring Data MongoDB, method names in repository interfaces are automatically translated into queries based on naming conventions.
+//It means if I have a field as username in my POJO, then I create a abstract method  named "findByUsername" in my repository interface (which is extending MongoRepository)
+//to find data using username, it will automatically implement that method to find data based on username. Magic!!!
+
+
+
